@@ -879,6 +879,13 @@ html&gt;body{padding:0}&lt;/style&gt;
       display: grid;
       gap: 14px;
     }
+    #uyen-nhi-playbook .prompt-fields[hidden] {
+      display: none;
+    }
+    #uyen-nhi-playbook .prompt-copy mark {
+      background: var(--accent);
+      color: var(--accent-foreground);
+    }
     #uyen-nhi-playbook .prompt-tools {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
@@ -1164,7 +1171,7 @@ html&gt;body{padding:0}&lt;/style&gt;
   &lt;section class=&quot;section&quot; aria-labelledby=&quot;prompt-studio&quot;&gt;
     &lt;div class=&quot;section-heading&quot;&gt;
       &lt;h3 id=&quot;prompt-studio&quot;&gt;Practise interviews with ChatGPT&lt;/h3&gt;
-      &lt;span class=&quot;text-small text-muted&quot;&gt;Choose a session, copy the prompt, then add your CV and job description&lt;/span&gt;
+      &lt;span class=&quot;text-small text-muted&quot;&gt;Choose a session, fill in the fields shown, then copy the finished prompt&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;card prompt-panel&quot;&gt;
       &lt;div class=&quot;prompt-tools&quot;&gt;
@@ -1184,6 +1191,8 @@ html&gt;body{padding:0}&lt;/style&gt;
         &lt;/label&gt;
         &lt;button class=&quot;btn btn-primary&quot; id=&quot;copy-prompt&quot; type=&quot;button&quot;&gt;&lt;i data-lucide=&quot;copy&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Copy prompt&lt;/button&gt;
       &lt;/div&gt;
+      &lt;div class=&quot;viz-controls prompt-fields&quot; id=&quot;prompt-fields&quot; aria-label=&quot;Prompt details&quot;&gt;&lt;/div&gt;
+      &lt;div id=&quot;prompt-fields-note&quot; class=&quot;text-small text-muted&quot;&gt;Highlighted wording updates as you type. The copied prompt will contain your entries without highlighting.&lt;/div&gt;
       &lt;pre class=&quot;prompt-copy&quot;&gt;&lt;code id=&quot;prompt-text&quot;&gt;&lt;/code&gt;&lt;/pre&gt;
       &lt;div id=&quot;copy-status&quot; class=&quot;status text-small text-muted&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -1281,7 +1290,7 @@ Rules:
 
 Begin by asking which experience I want to unpack first.`,
 
-        behavioural: `Act as a demanding but fair UK graduate interviewer for [FIRM] and [ROLE]. First ask me to paste the job description and my current CV if they are not already in the conversation.
+        behavioural: `Act as a demanding but fair UK graduate interviewer for {{company}} and {{role}}. First ask me to paste the job description and my current CV if they are not already in the conversation.
 
 Run an eight-question mock interview:
 - 2 motivation/fit questions;
@@ -1299,7 +1308,7 @@ Interview rules:
 
 Start by asking for the firm, role, job description, and CV.`,
 
-        &#x27;cv-fit&#x27;: `Act as a UK graduate recruiter screening me for [FIRM] [ROLE]. Ask me to paste my CV and the job description, then run a 25-minute CV and motivation interview.
+        &#x27;cv-fit&#x27;: `Act as a UK graduate recruiter screening me for {{company}} and the {{role}} role. Ask me to paste my CV and the job description, then run a 25-minute CV and motivation interview.
 
 Cover:
 - Tell me about yourself;
@@ -1311,7 +1320,7 @@ Cover:
 
 Ask one question at a time. Probe claims that sound generic. Do not coach during the interview. At the end, rate credibility, coherence, role motivation, evidence, commercial awareness, and concision. Tell me exactly which CV lines invited difficult questions and what evidence I need to strengthen—not what facts to invent.`,
 
-        case: `Act as an interviewer at a top UK strategy-consulting firm. Run one realistic 35-minute case interview suitable for a final-year undergraduate.
+        case: `Act as an interviewer at {{company}} hiring for {{role}}. Run one realistic 35-minute case interview suitable for a final-year undergraduate.
 
 Parameters:
 - Choose a case from profitability, market entry, growth, operations, public sector, or financial services. Do not reveal the case type in advance.
@@ -1324,7 +1333,7 @@ Parameters:
 
 At the end, score structure, prioritisation, maths accuracy, insight, creativity, business judgement, communication, and synthesis from 1–5. Give an error log, a stronger approach to the two weakest moments, and one follow-up drill. Begin with the case prompt only.`,
 
-        finance: `Act as a UK graduate interviewer for [BANK/FIRM], [DIVISION], [ROLE]. Ask me to paste the job description and CV before starting. Tailor technical depth to the actual division; do not ask investment-banking questions for an operations, risk, research, or compliance role.
+        finance: `Act as a UK graduate interviewer for {{company}}, {{division}}, and the {{role}} role. Ask me to paste the job description and CV before starting. Tailor technical depth to the actual division; do not ask investment-banking questions for an operations, risk, research, or compliance role.
 
 Run a 30-minute interview covering:
 1. Why this organisation, division, and role?
@@ -1336,7 +1345,7 @@ Run a 30-minute interview covering:
 
 Ask one question at a time. Probe vague claims, and ask what the development means for clients or the business. Give no feedback until the end. Score motivation, division knowledge, technical accuracy, commercial judgement, evidence, and communication from 1–5. Separate factual errors from weak delivery, then let me retry my two weakest answers.`,
 
-        risk: `Act as a senior interviewer at a UK political-risk, public-affairs, or strategic-communications consultancy hiring for [ROLE]. Ask me to paste the job description and choose one geographic or policy theme.
+        risk: `Act as a senior interviewer at {{company}}, a UK political-risk, public-affairs, or strategic-communications consultancy, hiring for {{role}}. Ask me to paste the job description and choose one geographic or policy theme.
 
 Run a 30-minute mock that tests:
 - motivation for the organisation and client work;
@@ -1349,13 +1358,13 @@ Run a 30-minute mock that tests:
 
 Ask one question at a time and challenge academic answers that do not reach a client implication. Do not reward confident speculation: require me to separate facts, assumptions, and uncertainty. At the end, score analytical rigour, relevance, stakeholder judgement, scenario thinking, commercial orientation, writing/briefing clarity, and intellectual honesty from 1–5. Give me one 10-minute briefing drill based on my weakest area.`,
 
-        hirevue: `Act as an asynchronous video-interview platform for [FIRM] [ROLE]. Ask me to paste the job description and CV first.
+        hirevue: `Act as an asynchronous video-interview platform for {{company}} and the {{role}} role. Ask me to paste the job description and CV first.
 
 Create six questions: two motivation, three competency/behavioural, and one commercial or situational. Present one question at a time. For each question, tell me to use an external 30-second preparation timer and a 90-second answer timer. I will type or dictate the answer when ready.
 
 Do not react, coach, or ask follow-ups between questions. After all six answers, score structure, relevance, specificity, energy, concision, and completion from 1–5. Flag slow openings, excessive context, weak personal ownership, and missing results. Give me a second six-question set only after I retry the two weakest responses.`,
 
-        written: `Act as the assessor for a UK graduate written exercise in [CONSULTING / POLITICAL RISK / PUBLIC AFFAIRS / FINANCE]. Create a self-contained source pack of 600–900 words containing relevant facts, a small table, stakeholder views, and two pieces of distracting information. Then give me a realistic task with a 30-minute time limit and a specified output, such as a 400-word client memo or one-page briefing.
+        written: `Act as the assessor for {{company}}&#x27;s {{role}} written exercise in {{division}}. Create a self-contained source pack of 600–900 words containing relevant facts, a small table, stakeholder views, and two pieces of distracting information. Then give me a realistic task with a 30-minute time limit and a specified output, such as a 400-word client memo or one-page briefing.
 
 Do not provide an outline or hints. Wait for my submission. Then score prioritisation, factual accuracy, structure, judgement, use of evidence, client orientation, tone, and grammar from 1–5. Identify any claims not supported by the source pack. Show a high-quality outline only after scoring my work, then ask me to rewrite the weakest paragraph.`,
 
@@ -1370,7 +1379,7 @@ First ask me for: test type (numerical, verbal, logical, SJT, or critical reason
 
 Do not pretend an invented score predicts employer performance. Begin by asking for my baseline data.`,
 
-        assessment: `Act as an assessor running a UK graduate in-tray exercise for [FIRM] [ROLE]. Give me a role brief, an objective, and eight short messages from different stakeholders containing deadlines, dependencies, risks, and at least one conflict.
+        assessment: `Act as an assessor running a UK graduate in-tray exercise at {{company}} for {{role}}. Give me a role brief, an objective, and eight short messages from different stakeholders containing deadlines, dependencies, risks, and at least one conflict.
 
 My tasks will be to:
 1. rank the eight items;
@@ -1380,6 +1389,28 @@ My tasks will be to:
 
 Do not signal which items matter most. Wait for my full answer, then score prioritisation, judgement, stakeholder management, risk awareness, written communication, and practicality from 1–5. Show where I confused urgency with importance and give a second, shorter scenario targeting my weakest skill.`
       };
+
+      const promptConfigs = {
+        behavioural: { company: &#x27;Deloitte&#x27;, role: &#x27;Graduate Consultant&#x27; },
+        &#x27;cv-fit&#x27;: { company: &#x27;Deloitte&#x27;, role: &#x27;Graduate Consultant&#x27; },
+        case: { company: &#x27;McKinsey &amp; Company&#x27;, role: &#x27;Business Analyst&#x27; },
+        finance: { company: &#x27;Fidelity International&#x27;, division: &#x27;Risk Management&#x27;, role: &#x27;Graduate Risk Analyst&#x27; },
+        risk: { company: &#x27;Control Risks&#x27;, role: &#x27;Graduate Analyst&#x27; },
+        hirevue: { company: &#x27;Deloitte&#x27;, role: &#x27;Graduate Consultant&#x27; },
+        written: { company: &#x27;Deloitte&#x27;, division: &#x27;Consulting&#x27;, role: &#x27;Graduate Consultant&#x27; },
+        assessment: { company: &#x27;Deloitte&#x27;, role: &#x27;Graduate Consultant&#x27; }
+      };
+
+      const promptFieldLabels = {
+        company: &#x27;Company or organisation&#x27;,
+        role: &#x27;Role or programme&#x27;,
+        division: &#x27;Division or career area&#x27;
+      };
+
+      const promptValues = Object.fromEntries(
+        Object.entries(promptConfigs).map(([key, values]) =&gt; [key, { ...values }])
+      );
+      const promptTokenPattern = /\{\{(company|role|division)\}\}/g;
 
       const phaseTitle = root.querySelector(&#x27;#phase-title&#x27;);
       const phaseGate = root.querySelector(&#x27;#phase-gate&#x27;);
@@ -1463,12 +1494,76 @@ Do not signal which items matter most. Wait for my full answer, then score prior
       });
 
       const promptSelect = root.querySelector(&#x27;#prompt-select&#x27;);
+      const promptFields = root.querySelector(&#x27;#prompt-fields&#x27;);
+      const promptFieldsNote = root.querySelector(&#x27;#prompt-fields-note&#x27;);
       const promptText = root.querySelector(&#x27;#prompt-text&#x27;);
       const copyButton = root.querySelector(&#x27;#copy-prompt&#x27;);
       const copyStatus = root.querySelector(&#x27;#copy-status&#x27;);
 
+      const getPromptValue = () =&gt; {
+        const key = promptSelect.value;
+        const defaults = promptConfigs[key] || {};
+        const values = promptValues[key] || {};
+        return (prompts[key] || &#x27;&#x27;).replace(promptTokenPattern, (_, field) =&gt; {
+          return String(values[field] || defaults[field] || &#x27;&#x27;).trim();
+        });
+      };
+
+      const renderPromptText = () =&gt; {
+        const key = promptSelect.value;
+        const template = prompts[key] || &#x27;&#x27;;
+        const defaults = promptConfigs[key] || {};
+        const values = promptValues[key] || {};
+        const parts = [];
+        let cursor = 0;
+
+        for (const match of template.matchAll(promptTokenPattern)) {
+          if (match.index &gt; cursor) {
+            parts.push(document.createTextNode(template.slice(cursor, match.index)));
+          }
+          const mark = document.createElement(&#x27;mark&#x27;);
+          mark.textContent = String(values[match[1]] || defaults[match[1]] || &#x27;&#x27;).trim();
+          parts.push(mark);
+          cursor = match.index + match[0].length;
+        }
+
+        if (cursor &lt; template.length) {
+          parts.push(document.createTextNode(template.slice(cursor)));
+        }
+        promptText.replaceChildren(...parts);
+      };
+
+      const renderPromptFields = () =&gt; {
+        const key = promptSelect.value;
+        const config = promptConfigs[key] || {};
+        const fields = Object.keys(config);
+        promptFields.hidden = fields.length === 0;
+        promptFieldsNote.hidden = fields.length === 0;
+        promptFields.replaceChildren(...fields.map((field) =&gt; {
+          const label = document.createElement(&#x27;label&#x27;);
+          label.className = &#x27;form-label&#x27;;
+          label.htmlFor = `prompt-field-${key}-${field}`;
+          label.append(document.createTextNode(promptFieldLabels[field] || field));
+
+          const input = document.createElement(&#x27;input&#x27;);
+          input.className = &#x27;form-control&#x27;;
+          input.type = &#x27;text&#x27;;
+          input.id = `prompt-field-${key}-${field}`;
+          input.value = promptValues[key][field];
+          input.setAttribute(&#x27;aria-describedby&#x27;, &#x27;prompt-fields-note&#x27;);
+          input.addEventListener(&#x27;input&#x27;, () =&gt; {
+            promptValues[key][field] = input.value;
+            renderPromptText();
+            copyStatus.textContent = &#x27;&#x27;;
+          });
+          label.append(input);
+          return label;
+        }));
+      };
+
       const updatePrompt = () =&gt; {
-        promptText.textContent = prompts[promptSelect.value] || &#x27;&#x27;;
+        renderPromptFields();
+        renderPromptText();
         copyStatus.textContent = &#x27;&#x27;;
       };
 
@@ -1487,7 +1582,7 @@ Do not signal which items matter most. Wait for my full answer, then score prior
 
       promptSelect.addEventListener(&#x27;change&#x27;, updatePrompt);
       copyButton.addEventListener(&#x27;click&#x27;, async () =&gt; {
-        const value = prompts[promptSelect.value] || &#x27;&#x27;;
+        const value = getPromptValue();
         let copied = false;
         try {
           if (navigator.clipboard &amp;&amp; window.isSecureContext) {
