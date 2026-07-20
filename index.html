@@ -9,7 +9,7 @@
 <style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
 </head>
 <body>
-<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Uyen Nhi Weekly Preparation Plan" srcdoc="&lt;!doctype html&gt;
+<iframe sandbox="allow-scripts allow-same-origin" referrerpolicy="no-referrer" title="Uyen Nhi Weekly Preparation Plan" srcdoc="&lt;!doctype html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
 &lt;meta charset=&quot;utf-8&quot;&gt;
@@ -806,6 +806,15 @@ html&gt;body{padding:0}&lt;/style&gt;
     #uyen-nhi-playbook .work-item:first-child {
       border-top: 1px solid var(--border);
     }
+    #uyen-nhi-playbook .task-copy,
+    #uyen-nhi-playbook .task-reference {
+      transition: opacity 160ms ease;
+    }
+    #uyen-nhi-playbook .task-item.is-complete .task-copy,
+    #uyen-nhi-playbook .task-reference.is-complete {
+      text-decoration: line-through;
+      opacity: 0.62;
+    }
     #uyen-nhi-playbook .owner {
       justify-self: end;
       text-align: right;
@@ -975,7 +984,7 @@ html&gt;body{padding:0}&lt;/style&gt;
     &lt;div class=&quot;card viz-stat&quot;&gt;
       &lt;span class=&quot;text-muted&quot;&gt;Your immediate focus&lt;/span&gt;
       &lt;span class=&quot;viz-stat-value&quot;&gt;Next 2 weeks&lt;/span&gt;
-      &lt;span&gt;CV, first interview stories, psychometric baseline, news habit, and mentor conversation.&lt;/span&gt;
+      &lt;span id=&quot;task-progress&quot; aria-live=&quot;polite&quot;&gt;0 of 8 goals complete&lt;/span&gt;
     &lt;/div&gt;
     &lt;div class=&quot;card viz-stat&quot;&gt;
       &lt;span class=&quot;text-muted&quot;&gt;Time with Minh&lt;/span&gt;
@@ -994,37 +1003,37 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;h3 id=&quot;next-two-weeks&quot;&gt;The next two weeks&lt;/h3&gt;
       &lt;span class=&quot;text-small text-muted&quot;&gt;Goals rather than daily deadlines&lt;/span&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;worklist&quot;&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Send your availability.&lt;/strong&gt; Give Minh a few times that work for you over the next two weeks so he can arrange the introduction.&lt;/div&gt;
+    &lt;div class=&quot;worklist&quot; id=&quot;two-week-checklist&quot;&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;send-availability&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-send-availability&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-send-availability&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Send your availability.&lt;/strong&gt; Give Minh a few times that work for you over the next two weeks so he can arrange the introduction.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Uyển Nhi&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Make the introduction.&lt;/strong&gt; Minh will introduce you to Dung Viet Dao and arrange a time for the two of you to speak.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;make-introduction&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-make-introduction&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-make-introduction&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Make the introduction.&lt;/strong&gt; Minh will introduce you to Dung Viet Dao and arrange a time for the two of you to speak.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Minh&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Start your interview stories.&lt;/strong&gt; Read the behavioural guide, list six to eight examples, and note your own action, outcome, and learning for each.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;interview-stories&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-interview-stories&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-interview-stories&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Start your interview stories.&lt;/strong&gt; Read the behavioural guide, list six to eight examples, and note your own action, outcome, and learning for each.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Uyển Nhi&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;CV draft.&lt;/strong&gt; Rebuild the CV in the Wall Street Oasis undergraduate format; keep it to one page and remove references.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;cv-draft&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-cv-draft&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-cv-draft&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;CV draft.&lt;/strong&gt; Rebuild the CV in the Wall Street Oasis undergraduate format; keep it to one page and remove references.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Uyển Nhi&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Get feedback on the CV.&lt;/strong&gt; Send the draft to Minh for one clear review covering evidence, wording, and role fit.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;cv-feedback&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-cv-feedback&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-cv-feedback&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Get feedback on the CV.&lt;/strong&gt; Send the draft to Minh for one clear review covering evidence, wording, and role fit.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Minh&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Start psychometric preparation.&lt;/strong&gt; Complete a baseline numerical, verbal, logical, and situational-judgement test, then note where you lost time or marks.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;psychometric-baseline&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-psychometric-baseline&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-psychometric-baseline&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Start psychometric preparation.&lt;/strong&gt; Complete a baseline numerical, verbal, logical, and situational-judgement test, then note where you lost time or marks.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Uyển Nhi&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Start following the news.&lt;/strong&gt; Build a simple habit and bring two stories each week: what happened, why it matters, and who is affected.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;news-habit&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-news-habit&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-news-habit&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Start following the news.&lt;/strong&gt; Build a simple habit and bring two stories each week: what happened, why it matters, and who is affected.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Uyển Nhi&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;work-item&quot;&gt;
-        &lt;div&gt;&lt;strong&gt;Set up one tracker.&lt;/strong&gt; Keep applications, preparation, deadlines, next steps, and questions in one place so nothing sits only in messages or email.&lt;/div&gt;
+      &lt;div class=&quot;work-item task-item&quot; data-task-id=&quot;shared-tracker&quot;&gt;
+        &lt;label class=&quot;form-check&quot; for=&quot;task-shared-tracker&quot;&gt;&lt;input class=&quot;form-check-input&quot; id=&quot;task-shared-tracker&quot; type=&quot;checkbox&quot;&gt;&lt;span class=&quot;form-check-label task-copy&quot;&gt;&lt;strong&gt;Set up one tracker.&lt;/strong&gt; Keep applications, preparation, deadlines, next steps, and questions in one place so nothing sits only in messages or email.&lt;/span&gt;&lt;/label&gt;
         &lt;span class=&quot;owner viz-badge&quot;&gt;Both&lt;/span&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1060,10 +1069,10 @@ html&gt;body{padding:0}&lt;/style&gt;
       &lt;/div&gt;
       &lt;div class=&quot;phase-details&quot;&gt;
         &lt;ul id=&quot;phase-list&quot;&gt;
-          &lt;li&gt;Finish a one-page CV using the WSO undergraduate template.&lt;/li&gt;
-          &lt;li&gt;Start drafting six to eight behavioural stories.&lt;/li&gt;
-          &lt;li&gt;Begin psychometric preparation and understand your weaker areas.&lt;/li&gt;
-          &lt;li&gt;Read the news regularly and practise explaining why a story matters.&lt;/li&gt;
+          &lt;li class=&quot;task-reference&quot; data-task-ref=&quot;cv-draft&quot;&gt;Finish a one-page CV using the WSO undergraduate template.&lt;/li&gt;
+          &lt;li class=&quot;task-reference&quot; data-task-ref=&quot;interview-stories&quot;&gt;Start drafting six to eight behavioural stories.&lt;/li&gt;
+          &lt;li class=&quot;task-reference&quot; data-task-ref=&quot;psychometric-baseline&quot;&gt;Begin psychometric preparation and understand your weaker areas.&lt;/li&gt;
+          &lt;li class=&quot;task-reference&quot; data-task-ref=&quot;news-habit&quot;&gt;Read the news regularly and practise explaining why a story matters.&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -1239,10 +1248,10 @@ html&gt;body{padding:0}&lt;/style&gt;
           title: &#x27;Get the basics into good shape&#x27;,
           gate: &#x27;Focus on preparation, not perfect answers&#x27;,
           items: [
-            &#x27;Finish a one-page CV using the WSO undergraduate template.&#x27;,
-            &#x27;Start drafting six to eight behavioural stories.&#x27;,
-            &#x27;Begin psychometric preparation and understand your weaker areas.&#x27;,
-            &#x27;Read the news regularly and practise explaining why a story matters.&#x27;
+            { text: &#x27;Finish a one-page CV using the WSO undergraduate template.&#x27;, taskId: &#x27;cv-draft&#x27; },
+            { text: &#x27;Start drafting six to eight behavioural stories.&#x27;, taskId: &#x27;interview-stories&#x27; },
+            { text: &#x27;Begin psychometric preparation and understand your weaker areas.&#x27;, taskId: &#x27;psychometric-baseline&#x27; },
+            { text: &#x27;Read the news regularly and practise explaining why a story matters.&#x27;, taskId: &#x27;news-habit&#x27; }
           ]
         },
         &#x27;next-month&#x27;: {
@@ -1375,6 +1384,59 @@ Do not signal which items matter most. Wait for my full answer, then score prior
       const phaseTitle = root.querySelector(&#x27;#phase-title&#x27;);
       const phaseGate = root.querySelector(&#x27;#phase-gate&#x27;);
       const phaseList = root.querySelector(&#x27;#phase-list&#x27;);
+      const taskProgress = root.querySelector(&#x27;#task-progress&#x27;);
+      const taskStorageKey = &#x27;uyen-nhi-playbook.tasks.v1&#x27;;
+      const taskItems = [...root.querySelectorAll(&#x27;[data-task-id]&#x27;)];
+      let taskState = {};
+
+      try {
+        taskState = JSON.parse(localStorage.getItem(taskStorageKey) || &#x27;{}&#x27;);
+      } catch (_) {
+        taskState = {};
+      }
+
+      const syncTasks = () =&gt; {
+        taskItems.forEach((item) =&gt; {
+          const complete = Boolean(taskState[item.dataset.taskId]);
+          const checkbox = item.querySelector(&#x27;input[type=&quot;checkbox&quot;]&#x27;);
+          item.classList.toggle(&#x27;is-complete&#x27;, complete);
+          if (checkbox) checkbox.checked = complete;
+        });
+        root.querySelectorAll(&#x27;[data-task-ref]&#x27;).forEach((item) =&gt; {
+          item.classList.toggle(&#x27;is-complete&#x27;, Boolean(taskState[item.dataset.taskRef]));
+        });
+        const completed = taskItems.filter((item) =&gt; Boolean(taskState[item.dataset.taskId])).length;
+        taskProgress.textContent = `${completed} of ${taskItems.length} goals complete`;
+      };
+
+      const saveTasks = () =&gt; {
+        try {
+          localStorage.setItem(taskStorageKey, JSON.stringify(taskState));
+        } catch (_) {
+          // The checklist still works for this visit when browser storage is unavailable.
+        }
+      };
+
+      taskItems.forEach((item) =&gt; {
+        const checkbox = item.querySelector(&#x27;input[type=&quot;checkbox&quot;]&#x27;);
+        if (!checkbox) return;
+        checkbox.addEventListener(&#x27;change&#x27;, () =&gt; {
+          taskState[item.dataset.taskId] = checkbox.checked;
+          saveTasks();
+          syncTasks();
+        });
+      });
+
+      window.addEventListener(&#x27;storage&#x27;, (event) =&gt; {
+        if (event.key !== taskStorageKey) return;
+        try {
+          taskState = JSON.parse(event.newValue || &#x27;{}&#x27;);
+        } catch (_) {
+          taskState = {};
+        }
+        syncTasks();
+      });
+
       root.querySelectorAll(&#x27;[data-phase]&#x27;).forEach((button) =&gt; {
         button.addEventListener(&#x27;click&#x27;, () =&gt; {
           const phase = phases[button.dataset.phase];
@@ -1389,9 +1451,14 @@ Do not signal which items matter most. Wait for my full answer, then score prior
           phaseGate.textContent = phase.gate;
           phaseList.replaceChildren(...phase.items.map((item) =&gt; {
             const li = document.createElement(&#x27;li&#x27;);
-            li.textContent = item;
+            li.textContent = typeof item === &#x27;string&#x27; ? item : item.text;
+            if (typeof item !== &#x27;string&#x27; &amp;&amp; item.taskId) {
+              li.dataset.taskRef = item.taskId;
+              li.classList.add(&#x27;task-reference&#x27;);
+            }
             return li;
           }));
+          syncTasks();
         });
       });
 
@@ -1435,6 +1502,7 @@ Do not signal which items matter most. Wait for my full answer, then score prior
         copyStatus.textContent = copied ? &#x27;Prompt copied.&#x27; : &#x27;Copy was blocked; select the prompt text and copy it manually.&#x27;;
       });
 
+      syncTasks();
       updatePrompt();
     })();
   &lt;/script&gt;
